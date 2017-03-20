@@ -1,0 +1,24 @@
+html {
+  min-height: 100%; margin:0; padding:0;
+}
+
+body {
+  margin:0px;
+  padding:0px;
+  color:#111111;
+  height: 100%;
+  font-family: "Open Sans", "Helvetica", sans-serif;
+  font-size:large;
+  background:#fefefe;
+}
+
+A:link {text-decoration:none; color:#2276c6; }
+A:visited {text-decoration:none; color:#2276c6; }
+A:active {text-decoration:none; color:#2276c6; }
+A:hover {text-decoration:underline; color:#3b88d2; }
+
+#contentdiv { padding:0px 4%; }
+#statusdiv { float:right; margin:10px 50px 0px 10px; }
+.statlab { text-align:right; font-weight:bold; font-size:medium; }
+.statval { font-style:italic; font-size:small; }
+
