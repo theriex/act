@@ -51,22 +51,24 @@ app = (function () {
             .attr("class", "titleword")
             .attr("x", rd.w)
             .attr("y", td.y1)
-            .attr("font-size", td.fs)
+            .attr("font-size", Math.round(0.5 * td.fs))
             .text("Act.")
             .style("opacity", 0.0)
             .transition().duration(600)
             .style("opacity", 1.0)
+            .attr("font-size", td.fs)
             .attr("x", 10);
         g.append("text")
             .attr("class", "titleword")
             .attr("text-anchor", "end")
             .attr("x", 10)
             .attr("y", td.y2)
-            .attr("font-size", td.fs)
+            .attr("font-size", Math.round(0.5 * td.fs))
             .text("Inform.")
             .style("opacity", 0.0)
             .transition().delay(600).duration(600)
             .style("opacity", 1.0)
+            .attr("font-size", td.fs)
             .attr("x", rd.w);
     }
 
