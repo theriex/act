@@ -84,10 +84,10 @@ app = (function () {
                  ["table", {id:"statustable"},
                   [["tr", {id:"statrow"},
                     [["td", {cla:"statlab"}, "Status:"],
-                     ["td", {cla:"statval"}, "Resolving entity."]]],
+                     ["td", {cla:"statval"}, "Seeking fiscal sponsorship."]]],
                    ["tr", {id:"updrow"},
                     [["td", {cla:"statlab"}, "Next Update:"],
-                     ["td", {cla:"statval"}, "April 5, 2017"]]]]]]];
+                     ["td", {cla:"statval"}, "May 11, 2017"]]]]]]];
         jt.out("maindiv", jt.tac2html(html));
         displayAnimatedTitle(rd);
         d3.select("#missiondiv").transition().delay(bd + 100).duration(dur)

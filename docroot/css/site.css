@@ -17,8 +17,16 @@ A:visited {text-decoration:none; color:#2276c6; }
 A:active {text-decoration:none; color:#2276c6; }
 A:hover {text-decoration:underline; color:#3b88d2; }
 
-#contentdiv { padding:0px 4%; }
+h1 { text-align:center; }
+
+#contentdiv, #doccontentdiv { padding:0px 4%; }
 #statusdiv { float:right; margin:10px 50px 0px 10px; }
 .statlab { text-align:right; font-weight:bold; font-size:medium; }
 .statval { font-style:italic; font-size:small; }
+
+.emnamesp { font-weight:bold; }
+#doccontentdiv { position:relative; margin:0px; height:100%; min-height:100vh;
+  background:#fefefe url("../img/actback.png") no-repeat fixed center;
+  background-size:contain; border-radius:10px; }
+.biodiv { padding:0px 0px 20px 0px; }
 
