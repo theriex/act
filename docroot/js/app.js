@@ -26,8 +26,12 @@ app = (function () {
 
     function getRectDims(ratio, minw) {
         var rd = {}, marg, over;
+        jt.log("window.innerWidth: " + window.innerWidth);
         //figuring 5% right and left margins to avoid getting too tight
         marg = Math.floor(2 * 0.05 * window.innerWidth);
+        if(window.innerWidth > 750) {
+            //extend margin to 20% if it's a larger display
+            marg = Math.floor(2 * 0.2 * window.innerWidth); }
         rd.w = window.innerWidth - marg;
         rd.h = Math.round((rd.w * ratio.h) / ratio.w);
         over = rd.h - window.innerHeight;
@@ -84,10 +88,10 @@ app = (function () {
                  ["table", {id:"statustable"},
                   [["tr", {id:"statrow"},
                     [["td", {cla:"statlab"}, "Status:"],
-                     ["td", {cla:"statval"}, "Seeking fiscal sponsorship."]]],
+                     ["td", {cla:"statval"}, "Assembling."]]],
                    ["tr", {id:"updrow"},
                     [["td", {cla:"statlab"}, "Next Update:"],
-                     ["td", {cla:"statval"}, "May 11, 2017"]]]]]]];
+                     ["td", {cla:"statval"}, "May 30, 2017"]]]]]]];
         jt.out("maindiv", jt.tac2html(html));
         displayAnimatedTitle(rd);
         d3.select("#missiondiv").transition().delay(bd + 100).duration(dur)
