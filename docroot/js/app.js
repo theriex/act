@@ -78,7 +78,8 @@ app = (function () {
 
 
     function displayDescription () {
-        var html, rd, dur = 600, bd = 1200;
+        var html, rd, dur = 600, bd = 2000, cname = "eric", 
+            chost = "epinova.com";
         rd = getRectDims({w:3, h:2}, 300);
         html = [["div", {id:"titdiv"},
                  ["svg", {id:"titsvg", width:rd.w, height:rd.h}]],
@@ -90,8 +91,11 @@ app = (function () {
                     [["td", {cla:"statlab"}, "Status:"],
                      ["td", {cla:"statval"}, "Assembling."]]],
                    ["tr", {id:"updrow"},
-                    [["td", {cla:"statlab"}, "Next Update:"],
-                     ["td", {cla:"statval"}, "May 30, 2017"]]]]]]];
+                    [["td", {cla:"statlab"}, ""],
+                     ["td", {cla:"statval", colspan:2}, 
+                      ["To get involved, or for more information, ",
+                       ["a", {href:"mailto:" + cname + "@" + chost},
+                        "contact " + cname]]]]]]]]];
         jt.out("maindiv", jt.tac2html(html));
         displayAnimatedTitle(rd);
         d3.select("#missiondiv").transition().delay(bd + 100).duration(dur)
