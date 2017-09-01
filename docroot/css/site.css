@@ -23,6 +23,7 @@ h1 { text-align:center; }
 #statusdiv { float:right; margin:10px 50px 0px 10px; }
 .statlab { text-align:right; font-weight:bold; font-size:medium; }
 .statval { font-style:italic; font-size:small; }
+#whatwedodiv { font-size:medium; padding-top:10px; color:#666; }
 
 .emnamesp { font-weight:bold; }
 #doccontentdiv { position:relative; margin:0px; height:100%; min-height:100vh;

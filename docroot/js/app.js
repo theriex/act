@@ -1,5 +1,5 @@
 /*jslint browser, multivar, white, fudge */
-/*global window jtminjsDecorateWithUtilities */
+/*global window d3 jtminjsDecorateWithUtilities */
 
 var app = {},  //Global container for application level funcs and values
     jt = {};   //Global access to general utility methods
@@ -16,7 +16,7 @@ app = (function () {
         elem.type = "text/css";
         elem.href = "//fonts.googleapis.com/css?family=Roboto";
         document.head.appendChild(elem);
-        var elem = document.createElement("link");
+        elem = document.createElement("link");
         elem.rel = "stylesheet";
         elem.type = "text/css";
         elem.href = "//fonts.googleapis.com/css?family=Open+Sans";
@@ -45,46 +45,117 @@ app = (function () {
     }
 
 
+    function showTextElements() {
+        var dur = 600;
+        d3.select("#missiondiv").transition().duration(dur)
+            .style("opacity", 1.0);
+        d3.select("#whatwedodiv").transition().delay(5 * dur).duration(2 * dur)
+            .style("opacity", 1.0);
+        d3.select("#statusdiv").transition().delay(22 * dur).duration(2 * dur)
+            .style("opacity", 1.0);
+    }
+
+
+    function joinWords(ignore, td, es) {
+        var dur = 1200, ab = es.act.node().getBBox();
+        es.act.transition().duration(dur)
+            .attr("x", 0)
+            .attr("y", ab.height)
+            .style("opacity", 0.0);
+        es.info2.transition().duration(dur)
+            .attr("x", ab.width)
+            .attr("y", ab.height)
+            .style("opacity", 0.0);
+        es.ai = es.g.append("text")
+            .attr("class", "titleword")
+            .attr("x", 0)
+            .attr("y", ab.height)
+            .attr("font-size", td.fs2)
+            .text("ActInform")
+            .style("opacity", 0.0);
+        es.ai.transition().delay(300).duration(dur - 300)
+            .style("opacity", 1.0);
+        setTimeout(function () {
+            jt.byId("titsvg").style.height = Math.round(1.2 * ab.height) + "px";
+            showTextElements(); }, dur);
+    }
+
+
+    function shrinkWords(rd, td, es) {
+        es.act.transition().duration(600)
+            .attr("font-size", td.fs2);
+        es.info2.transition().duration(600)
+            .attr("font-size", td.fs2);
+        setTimeout(function () {
+            joinWords(rd, td, es); }, 650);
+    }
+
+
+    function stabilizeWords(rd, td, es) {
+        var ib = es.inform.node().getBBox();
+        es.inform.transition().duration(300)
+            .style("opacity", 0.0);
+        es.info2 = es.g.append("text")
+            .attr("class", "titleword")
+            .attr("x", ib.x + 1)  //avoid slight shift left
+            .attr("y", td.y2)
+            .attr("font-size", td.fs)
+            .text("Inform.")
+            .style("opacity", 0.0);
+        es.info2.transition().duration(300)
+            .style("opacity", 1.0);
+        setTimeout(function () {
+            shrinkWords(rd, td, es); }, 350);
+    }
+
+
     function displayAnimatedTitle (rd) {
-        var g, td, act;
+        var td, es = {};
         td = {fs:Math.round(0.4 * rd.h),
+              fs2:Math.round(0.15 * rd.h),
+              x1:10,
               y1:Math.round(0.4 * rd.h),
               y2:Math.round(0.84 * rd.h)};
-        g = d3.select("#titsvg").append("g");
-        act = g.append("text")
+        es.g = d3.select("#titsvg").append("g");
+        es.act = es.g.append("text")
+            .attr("id", "tact")
             .attr("class", "titleword")
             .attr("x", rd.w)
             .attr("y", td.y1)
             .attr("font-size", Math.round(0.5 * td.fs))
             .text("Act.")
-            .style("opacity", 0.0)
-            .transition().duration(600)
+            .style("opacity", 0.0);
+        es.act.transition().duration(600)
             .style("opacity", 1.0)
             .attr("font-size", td.fs)
-            .attr("x", 10);
-        g.append("text")
+            .attr("x", td.x1);
+        es.inform = es.g.append("text")
+            .attr("id", "tinform")
             .attr("class", "titleword")
             .attr("text-anchor", "end")
-            .attr("x", 10)
+            .attr("x", td.x1)
             .attr("y", td.y2)
             .attr("font-size", Math.round(0.5 * td.fs))
             .text("Inform.")
-            .style("opacity", 0.0)
-            .transition().delay(600).duration(600)
+            .style("opacity", 0.0);
+        es.inform.transition().delay(600).duration(600)
             .style("opacity", 1.0)
             .attr("font-size", td.fs)
             .attr("x", rd.w);
+        setTimeout(function () {
+            stabilizeWords(rd, td, es); }, 1600);
     }
 
 
     function displayDescription () {
-        var html, rd, dur = 600, bd = 2000, cname = "eric", 
-            chost = "epinova.com";
+        var html, rd, cname = "eric", chost = "epinova.com";
         rd = getRectDims({w:3, h:2}, 300);
         html = [["div", {id:"titdiv"},
                  ["svg", {id:"titsvg", width:rd.w, height:rd.h}]],
                 ["div", {id:"missiondiv", style:"opacity:0.0;"},
-                 "Our mission is to provide free and unique information tools amplifying the impact of those working for social justice."],
+                 "Our mission is to increase the impact of volunteer driven organizations through zero-cost web technology."],
+                ["div", {id:"whatwedodiv", style:"opacity:0.0;"},
+                 "We work with thought leaders and volunteer driven organizations striving for a more equal, supportive, connected, and environmentally conscious world.  Our goal is to smoothly adapt what you are already doing so your thoughts and actions become part of your web presence."],
                 ["div", {id:"statusdiv", style:"opacity:0.0;"},
                  ["table", {id:"statustable"},
                   [["tr", {id:"statrow"},
@@ -98,10 +169,6 @@ app = (function () {
                         "contact " + cname]]]]]]]]];
         jt.out("maindiv", jt.tac2html(html));
         displayAnimatedTitle(rd);
-        d3.select("#missiondiv").transition().delay(bd + 100).duration(dur)
-            .style("opacity", 1.0);
-        d3.select("#statusdiv").transition().delay(bd + 3600).duration(dur)
-            .style("opacity", 1.0);
     }
 
 
@@ -116,5 +183,6 @@ return {
         setTimeout(loadFonts, 50);
         setTimeout(displayHome, 75);
     }
-}}());
+};
+}());
         
