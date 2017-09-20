@@ -51,7 +51,7 @@ app = (function () {
             .style("opacity", 1.0);
         d3.select("#whatwedodiv").transition().delay(5 * dur).duration(2 * dur)
             .style("opacity", 1.0);
-        d3.select("#statusdiv").transition().delay(22 * dur).duration(2 * dur)
+        d3.select("#statusdiv").transition().delay(32 * dur).duration(2 * dur)
             .style("opacity", 1.0);
     }
 
@@ -63,7 +63,7 @@ app = (function () {
             .attr("y", ab.height)
             .style("opacity", 0.0);
         es.info2.transition().duration(dur)
-            .attr("x", ab.width)
+            .attr("x", Math.round(ab.width - (0.2 * ab.width)))
             .attr("y", ab.height)
             .style("opacity", 0.0);
         es.ai = es.g.append("text")
@@ -153,9 +153,10 @@ app = (function () {
         html = [["div", {id:"titdiv"},
                  ["svg", {id:"titsvg", width:rd.w, height:rd.h}]],
                 ["div", {id:"missiondiv", style:"opacity:0.0;"},
-                 "Our mission is to increase the impact of volunteer driven organizations through zero-cost web technology."],
+                 "Our mission is to increase the impact of social justice organizations using zero-cost web technology."],
                 ["div", {id:"whatwedodiv", style:"opacity:0.0;"},
-                 "We work with thought leaders and volunteer driven organizations striving for a more equal, supportive, connected, and environmentally conscious world.  Our goal is to smoothly adapt what you are already doing so your thoughts and actions become part of your web presence."],
+                 [["p", "We learn how your organization works, then identify zero-cost technology that can be used to increase the visibility of your actions and expertise. If you are considering software, we can help verify it will meet your needs. If tools are missing, we can build them, and make them available to others."],
+                  ["p", "Your website is a resource for the community you serve, your constituents, and those seeking to learn. Make it do more without having to update it separately from your workflow. Free consultation, free software, a resilient web, better world."]]],
                 ["div", {id:"statusdiv", style:"opacity:0.0;"},
                  ["table", {id:"statustable"},
                   [["tr", {id:"statrow"},
@@ -164,7 +165,7 @@ app = (function () {
                    ["tr", {id:"updrow"},
                     [["td", {cla:"statlab"}, ""],
                      ["td", {cla:"statval", colspan:2}, 
-                      ["To get involved, or for more information, ",
+                      ["For more information, ",
                        ["a", {href:"mailto:" + cname + "@" + chost},
                         "contact " + cname]]]]]]]]];
         jt.out("maindiv", jt.tac2html(html));
