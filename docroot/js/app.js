@@ -153,7 +153,7 @@ app = (function () {
         html = [["div", {id:"titdiv"},
                  ["svg", {id:"titsvg", width:rd.w, height:rd.h}]],
                 ["div", {id:"missiondiv", style:"opacity:0.0;"},
-                 "Our mission is to increase the impact of social justice organizations using zero-cost web technology."],
+                 "Our mission is to increase the impact of social justice organizations through zero-cost web technology."],
                 ["div", {id:"whatwedodiv", style:"opacity:0.0;"},
                  [["p", "We learn how your organization works, then identify zero-cost technology that can be used to increase the visibility of your actions and expertise. If you are considering software, we can help verify it will meet your needs. If tools are missing, we can build them, and make them available to others."],
                   ["p", "Your website is a resource for the community you serve, your constituents, and those seeking to learn. Make it do more without having to update it separately from your workflow. Free consultation, free software, a resilient web, better world."]]],
