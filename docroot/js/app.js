@@ -24,6 +24,24 @@ app = (function () {
     }
 
 
+    function extClickHandler (event) {
+        var src;
+        jt.evtend(event);
+        src = event.target || event.srcElement;
+        if(src && src.href) {
+            window.open(src.href); }
+        return false;
+    }
+
+
+    function externalizeLinks () {
+        var nodes = document.getElementsByTagName("a");
+        Array.prototype.forEach.call(nodes, function (node) {
+            if(node.href && node.href.indexOf("http") === 0) {
+                jt.on(node, "click", extClickHandler); } });
+    }
+
+
     function getRectDims(ratio, minw) {
         var rd = {}, marg, over;
         jt.log("window.innerWidth: " + window.innerWidth);
@@ -53,6 +71,8 @@ app = (function () {
             .style("opacity", 1.0);
         d3.select("#statusdiv").transition().delay(32 * dur).duration(2 * dur)
             .style("opacity", 1.0);
+        d3.select("#casesdiv").transition().delay(40 * dur).duration(2 * dur)
+            .style("opacity", 1.0);
     }
 
 
@@ -77,6 +97,7 @@ app = (function () {
             .style("opacity", 1.0);
         setTimeout(function () {
             jt.byId("titsvg").style.height = Math.round(1.2 * ab.height) + "px";
+            externalizeLinks();
             showTextElements(); }, dur);
     }
 
@@ -165,9 +186,9 @@ app = (function () {
                    ["tr", {id:"updrow"},
                     [["td", {cla:"statlab"}, ""],
                      ["td", {cla:"statval", colspan:2}, 
-                      ["For more information, ",
+                      ["For info, ",
                        ["a", {href:"mailto:" + cname + "@" + chost},
-                        "contact " + cname]]]]]]]]];
+                        "email " + cname]]]]]]]]];
         jt.out("maindiv", jt.tac2html(html));
         displayAnimatedTitle(rd);
     }

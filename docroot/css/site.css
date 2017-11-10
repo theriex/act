@@ -31,3 +31,11 @@ h1 { text-align:center; }
   background-size:contain; border-radius:10px; }
 .biodiv { padding:0px 0px 20px 0px; }
 
+#casesdiv { clear:both; opacity:0.0; padding-top:10px; 
+  color:#666; font-size:small; }
+#casesdiv div { font-size:small; margin-top:10px; padding:5px; 
+  border:3px solid #999; border-radius:10px; }
+#casesdiv img { max-height:40px; float:left; }
+.cdsp { font-size:medium; }
+.cdsp a { font-style:italic; }
+
