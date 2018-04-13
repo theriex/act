@@ -31,6 +31,10 @@ h1 { text-align:center; }
   background-size:contain; border-radius:10px; }
 .biodiv { padding:0px 0px 20px 0px; }
 
+#missiondiv { opacity:0.0; padding:10px 0px; font-style:italic; }
+#whatwedodiv { opacity:0.0; }
+#statusdiv { opacity:0.0; }
+
 #casesdiv { clear:both; opacity:0.0; padding-top:10px; 
   color:#666; font-size:small; }
 #casesdiv div { font-size:small; margin-top:10px; padding:5px; 
